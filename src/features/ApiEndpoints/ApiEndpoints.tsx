@@ -17,7 +17,6 @@ const filterObject = (obj: Record<string, any>, keyStartsWith: string) =>
     }, {});
 
 const reduceObj = (obj: Record<string, any>) => {
-  console.log(Object.keys(obj));
   return Object.keys(obj).reduce(
     (reduceObj: { [key: string]: any }, path: string) => {
       const tag = path.split("/")[1];

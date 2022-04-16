@@ -20,7 +20,7 @@ export default function DisclosureComponent({
         {({ open }) => (
           <>
             <Disclosure.Button
-              className={`flex justify-between w-full px-4 py-2 font-medium text-left text-purple-900 rounded-lg  focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75 
+              className={`flex justify-between w-full px-4 py-4 font-medium text-left text-black rounded-lg  focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75 
               ${classes.button} 
               `}
             >
@@ -32,7 +32,7 @@ export default function DisclosureComponent({
               />
             </Disclosure.Button>
             <Disclosure.Panel
-              className={`px-4 pt-4 pb-2 text-sm text-gray-500 ${classes.panel}`}
+              className={`px-4 pt-4 pb-2 text-sm rounded-lg text-gray-500 ${classes.panel}`}
             >
               {panel}
             </Disclosure.Panel>

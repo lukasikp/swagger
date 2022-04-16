@@ -1,11 +1,12 @@
 import { Paths } from "../../../../types/Paths";
 import Disclosure from "../../../../components/Disclosure/Disclosure";
+import Panel from "../Panel/Panel";
 
 interface PathsComponentProps {
   paths: Paths;
 }
 
-const getFlattenPaths = (object: Record<string, any>) => {
+const getFlattenPaths = (object: any) => {
   let arr: any[] = [];
   Object.keys(object).forEach((path) => {
     Object.keys(object[path]).forEach((method) => {
@@ -17,18 +18,19 @@ const getFlattenPaths = (object: Record<string, any>) => {
 
 const PathsComponent = ({ paths }: PathsComponentProps) => {
   const flattenPaths = getFlattenPaths(paths);
-  console.log(flattenPaths);
+
   return (
     <>
       {flattenPaths.map((path) => (
         <Disclosure
+          theme={path.method}
           key={`${path.method}-${path.path}`}
           button={
             <span>
               {path.method} -- {path.path}{" "}
             </span>
           }
-          panel={<p>panel</p>}
+          panel={<Panel responses={path.responses} path={path.path} />}
         />
       ))}
     </>
