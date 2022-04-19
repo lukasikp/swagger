@@ -8,29 +8,20 @@ interface ApiEndpointsProps {
   tags: Tag[];
 }
 
-const filterObject = (obj: Record<string, any>, keyStartsWith: string) =>
-  Object.keys(obj)
-    .filter((key) => key.startsWith(keyStartsWith))
-    .reduce((reduceObj: { [key: string]: any }, key) => {
-      reduceObj[key] = obj[key];
-      return reduceObj;
-    }, {});
-
-const reduceObj = (obj: Record<string, any>) => {
+const groupByEndpoint = (obj: Paths) => {
   return Object.keys(obj).reduce(
-    (reduceObj: { [key: string]: any }, path: string) => {
-      const tag = path.split("/")[1];
-      if (!reduceObj[tag]) reduceObj[tag] = {};
-      reduceObj[tag][path] = obj[path];
-      return reduceObj;
+    (groupByEndpoint: { [key: string]: any }, path: string) => {
+      const endpoint = path.split("/")[1];
+      if (!groupByEndpoint[endpoint]) groupByEndpoint[endpoint] = {};
+      groupByEndpoint[endpoint][path] = obj[path];
+      return groupByEndpoint;
     },
     {}
   );
 };
 
 const ApiEndpoints = ({ paths, tags }: ApiEndpointsProps) => {
-  const mappedPaths = reduceObj(paths);
-
+  const groupedPaths = groupByEndpoint(paths);
   return (
     <>
       {tags.map((tag) => (
@@ -42,7 +33,7 @@ const ApiEndpoints = ({ paths, tags }: ApiEndpointsProps) => {
               <span className="text-xs"> {tag.description}</span>
             </span>
           }
-          panel={<PathsComponent paths={mappedPaths[tag.name]} />}
+          panel={<PathsComponent paths={groupedPaths[tag.name]} />}
         ></Disclosure>
       ))}
     </>

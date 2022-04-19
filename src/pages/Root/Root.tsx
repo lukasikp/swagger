@@ -1,24 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import useFetch from "../../services/useFetch";
 import ApiEndpoints from "../../features/ApiEndpoints/ApiEndpoints";
-import { SwaggerResponse } from "../../types/Swagger";
 import { DefinitionProvider } from "../../context/DefinitionsContext/DefinitionContext";
-const petstore = require("../../mock/pertstore.json");
+import InfoSection from "../../components/InfoSection/InfoSection";
+import Spinner from "../../components/Spinner/Spinner";
+
 function Root() {
-  // const { data, loading, status } = useFetch<any>(
-  //   // "https://petstore.swagger.io/v2/swagger.json"
-  //   "../../mock/pertstore.json"
-  // );
-  const data = petstore;
-  const loading = false;
+  const { data, loading } = useFetch<any>(
+    "https://petstore.swagger.io/v2/swagger.json"
+  );
+
   return (
-    <div className="w-full pt-16">
+    <div className="w-full pt-8">
       <div className="w-full mx-auto bg-white rounded-2xl">
-        {loading && <span>Loading</span>}
+        {loading && <Spinner />}
         {data && (
-          <DefinitionProvider definitions={data.definitions} swagger={data}>
-            <ApiEndpoints paths={data.paths} tags={data.tags} />
-          </DefinitionProvider>
+          <>
+            <InfoSection {...data.info} />
+            <DefinitionProvider definitions={data.definitions} swagger={data}>
+              <ApiEndpoints paths={data.paths} tags={data.tags} />
+            </DefinitionProvider>
+          </>
         )}
       </div>
     </div>

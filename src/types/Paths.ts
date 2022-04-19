@@ -1,33 +1,51 @@
+import { JSONSchema4 } from "json-schema";
+
 export interface Paths {
   [path: string]: Path;
 }
 
-export interface Path {
-  [request: string]: Request;
+export enum Method {
+  GET = "get",
+  POST = "post",
+  PUT = "put",
+  DELETE = "delete",
 }
+
+export type Path = Partial<Record<Method, Request>>;
 
 export interface Request {
   responses: {
     [status: string]: Response;
   };
+  parameters?: Parameters[];
   [key: string]: any;
 }
 
 export interface Response {
   description: string;
-  schema?: Schema;
+  schema?: JSONSchema4;
+  headers?: Headers;
+}
+export interface Headers {
+  [key: string]: {
+    type: string;
+    format: string;
+    description: string;
+  };
 }
 
-export interface Schema {
-  $ref: string;
-  type?: string;
-  items?: { $ref: string };
+export interface Parameters {
+  name: string;
+  in: string;
+  description?: string;
+  required: boolean;
+  type: string;
+  format?: string;
+  schema?: JSONSchema4;
+  items: {
+    type: string;
+    enum: string;
+    default: string;
+  };
+  collectionFormat: string;
 }
-// type objectSchema = {
-//   type?: string;
-//   [key: string]: any;
-// };
-// type arraySchema = {
-//   type: "array";
-//   items?: { $ref: string; [key: string]: any };
-// };
