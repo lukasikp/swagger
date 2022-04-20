@@ -5,9 +5,10 @@ import ParametersDescriptionCell from "./ParametersDescriptionCell";
 
 interface ParametersProps {
   parameters: Parameters[];
+  uniqueId: string;
 }
 
-const ParametersComponent = ({ parameters }: ParametersProps) => {
+const ParametersComponent = ({ parameters, uniqueId }: ParametersProps) => {
   const columns = [{ name: "Name" }, { name: "Description" }];
   const rows = parameters.map((param) => ({
     name: (
@@ -22,6 +23,7 @@ const ParametersComponent = ({ parameters }: ParametersProps) => {
       <ParametersDescriptionCell
         description={param.description}
         schema={param.schema}
+        uniqueId={uniqueId}
       />
     ),
   }));

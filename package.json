@@ -57,5 +57,8 @@
     "enzyme-to-json": "^3.6.2",
     "postcss": "^8.4.12",
     "tailwindcss": "^3.0.23"
+  },
+  "jest": {
+    "snapshotSerializers": ["enzyme-to-json/serializer"]
   }
 }
