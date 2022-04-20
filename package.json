@@ -7,13 +7,14 @@
     "@heroicons/react": "^1.0.6",
     "@material-ui/core": "^4.12.4",
     "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^12.1.4",
+    "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.4.1",
     "@types/json-schema": "^7.0.11",
     "@types/node": "^16.11.26",
     "@types/react": "^17.0.44",
     "axios": "^0.26.1",
+    "http-status-codes": "^2.2.0",
     "material-ui-json-schema-viewer": "^2.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
@@ -47,8 +48,13 @@
     ]
   },
   "devDependencies": {
+    "@types/enzyme": "^3.10.12",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/react-dom": "^18.0.0",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.7",
     "autoprefixer": "^10.4.4",
+    "enzyme": "^3.11.0",
+    "enzyme-to-json": "^3.6.2",
     "postcss": "^8.4.12",
     "tailwindcss": "^3.0.23"
   }
